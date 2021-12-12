@@ -1,0 +1,11 @@
+body {
+    background: #498CEC;
+    color: #ffffff;
+}
+
+.container-fluid {
+    padding: 75px 75px 0 100px;
+}
+
+
+/*----helpers----*/

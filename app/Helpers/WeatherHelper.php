@@ -15,9 +15,9 @@ class WeatherHelper
         $weather = new OpenWeather();
         $weatherData = [];
 
-        if ($data['code']) {
+        if (!empty($data['code'])) {
             $weatherData = $weather->getCurrentWeatherByCityId($data['code']);
-        } elseif($data['lat'] && $data['long']) {
+        } elseif(!empty($data['lat']) && !empty($data['long'])) {
             $weatherData = $weather->getCurrentWeatherByCoords($data['lat'], $data['long']);
         }
 

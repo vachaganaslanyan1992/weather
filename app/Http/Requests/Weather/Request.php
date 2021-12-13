@@ -24,7 +24,7 @@ class Request extends FormRequest
     public function rules()
     {
         return [
-            'code' => 'max:100',
+            'code' => 'numeric|min:1|max:100000000',
             'lat' => 'max:20',
             'long' => 'max:20',
         ];

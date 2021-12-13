@@ -78,17 +78,23 @@ class OpenWeather
     private function getCloud(int $cloudPercent): array
     {
         $cloudData['percent'] = $cloudPercent;
+        $imageFolder = Config::get('openweather.images_path');
 
         if ($cloudPercent >= 80 && $cloudPercent <= 100) {
             $cloudData['description'] = 'advantage thunderstorm';
+            $cloudData['image'] = $imageFolder . 'strom.png';
         } elseif ($cloudPercent >= 60 && $cloudPercent < 80) {
             $cloudData['description'] = 'advantage rain';
+            $cloudData['image'] = $imageFolder . 'rain.png';
         } elseif ($cloudPercent >= 40 && $cloudPercent < 60) {
             $cloudData['description'] = 'advantage cloud';
+            $cloudData['image'] = $imageFolder . 'cloud.png';
         } elseif ($cloudPercent >= 20 && $cloudPercent < 40) {
             $cloudData['description'] = 'advantage partly cloud';
+            $cloudData['image'] = $imageFolder . 'partly-cloudy.png';
         } else {
             $cloudData['description'] = 'advantage sun';
+            $cloudData['image'] = $imageFolder . 'sun.png';
         }
 
         return $cloudData;
@@ -108,6 +114,7 @@ class OpenWeather
         }
 
         return [
+            'name' => $struct['name'],
             'temp' => round($struct['main']['temp']),
             'pressure' => round($struct['main']['pressure']),//hPa
             'humidity' => round($struct['main']['humidity']),//%

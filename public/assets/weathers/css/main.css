@@ -1,11 +1,86 @@
 body {
     background: #498CEC;
     color: #ffffff;
+    line-height: 1;
+    font-family: Lato;
 }
 
 .container-fluid {
     padding: 75px 75px 0 100px;
 }
 
+.selected-city {
+    font-size: 50px;
+    margin-bottom: 8px;
+}
+
+.countries-list {
+    display: none;
+}
+
+.countries-list .bootstrap-select {
+    width: 579px!important;
+}
+
+.countries-list button {
+    height: 97px;
+    z-index: 1;
+}
+
+.countries-list .filter-option {
+    height: 44px!important;
+    font-size: 30px;
+    text-align: center!important;
+}
+
+.countries-list .dropdown-toggle:after {
+    display: none!important;
+}
+
+.weather-icon {
+    vertical-align: top;
+}
+
+.change-city:hover, .current-location:hover {
+    cursor: pointer;
+}
 
 /*----helpers----*/
+.dn {
+    display: none;
+}
+.fs-18 {
+    font-size: 18px;
+}
+
+.fs-25 {
+    font-size: 25px;
+}
+
+.fs-180 {
+    font-size: 180px;
+}
+
+.opacity-3 {
+    opacity: 0.6;
+}
+
+.location-image {
+    height: 19px;
+}
+
+.mt-190 {
+    margin-top: 190px;
+}
+
+.mt-218 {
+    margin-top: 218px;
+}
+
+.pr {
+    position: relative;
+}
+
+.pa {
+    position: absolute;
+}

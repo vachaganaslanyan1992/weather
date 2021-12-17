@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\WeatherHelper;
 use App\Http\Requests\Weather\Request;
 use App\Models\Cities\City;
+use App\OpenWeather\OpenWeather;
 use Illuminate\Http\JsonResponse;
 
 class WeatherController extends Controller
@@ -27,7 +27,7 @@ class WeatherController extends Controller
      */
     public function getWeatherData(Request $request): JsonResponse
     {
-        $data = WeatherHelper::getData($request->all());
-        return response()->json(['weather' => $data]);
+        $weather = new OpenWeather();
+        return response()->json(['weather' => $weather->getCurrentWeatherData($request->validated())]);
     }
 }

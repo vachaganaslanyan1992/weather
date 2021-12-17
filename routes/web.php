@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\WeatherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,5 +13,4 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [\App\Http\Controllers\WeatherController::class, 'index'])->name('home');
-Route::post('/', [\App\Http\Controllers\WeatherController::class, 'getWeatherData']);
+Route::get('/', [WeatherController::class, 'index'])->name('home');

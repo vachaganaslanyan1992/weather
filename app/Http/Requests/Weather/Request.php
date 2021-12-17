@@ -24,24 +24,9 @@ class Request extends FormRequest
     public function rules()
     {
         return [
-            'code' => 'numeric|min:1|max:100000000',
-            'lat' => 'max:20',
-            'long' => 'max:20',
+            "code" => "required_without:lat,long|numeric|min:1|max:100000000",
+            "lat" => "required_without:code|max:20",
+            "long" => "required_without:code|max:20"
         ];
-    }
-
-    /**
-     * @param $validator
-     */
-    public function withValidator($validator)
-    {
-        $validator->after(function ($validator) {
-            $code = $this->input('code');
-            $lat = $this->input('lat');
-            $long = $this->input('long');
-            if ($validator->errors()->isEmpty() && empty($code) && (empty($lat) || empty($long))) {
-                $validator->errors()->add('code', "Please select country");
-            }
-        });
     }
 }

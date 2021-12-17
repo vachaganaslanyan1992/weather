@@ -2,15 +2,15 @@ var $weather = {};
 $weather.temperature = 0;
 
 $weather.hideCountryList = function () {
-    $('.countries-list').hide();
+    $(".countries-list").hide();
 }
 
 $weather.calculateCF = function () {
-    if ($('input[name="deg"]:checked').val() === 'f') {
+    if ($("input[name='deg']:checked").val() === "f") {
         let far = ($weather.temperature * 9/5) + 32;
-        $('.temperature').html(far.toFixed(0));
+        $(".temperature").html(far.toFixed(0));
     } else  {
-        $('.temperature').html($weather.temperature);
+        $(".temperature").html($weather.temperature);
     }
 }
 
@@ -22,11 +22,11 @@ $weather.chooseCity = function () {
 
 $weather.successLocation = function (pos) {
     let crd = pos.coords;
-    $weather.choosePlace({lat: crd.latitude, long: crd.longitude}, true)
+    $weather.choosePlace({lat: crd.latitude, long: crd.longitude}, true);
 }
 
 $weather.errorLocation = function (err) {
-    $weather.choosePlace({code: 616052}, true)
+    $weather.choosePlace({code: 616052}, true);
 }
 
 $weather.chooseLocation = function () {
@@ -41,39 +41,36 @@ $weather.chooseLocation = function () {
 }
 
 $weather.changeCity = function () {
-    $('.change-city').click(function () {
-        $('.countries-list').show();
+    $(".change-city").click(function () {
+        $(".countries-list").show();
     });
 }
 
 $weather.choosePlace = function (params, showContainer = false) {
     $.ajax({
-        url: '/',
-        method: 'post',
-        dataType: 'json',
+        url: "/api",
+        method: "post",
+        dataType: "json",
         data: params,
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
         success: function (data) {
             $weather.hideCountryList();
 
-            $('.selected-city').html(data.weather.name);
-            $('.weather-icon img').attr('src', data.weather.clouds.image);
-            $('.temperature-description').html(data.weather.clouds.description);
+            $(".selected-city").html(data.weather.name);
+            $(".weather-icon img").attr("src", data.weather.clouds.image);
+            $(".temperature-description").html(data.weather.clouds.description);
 
             $weather.temperature = data.weather.temp;
-            $('.temperature').html($weather.temperature);
+            $(".temperature").html($weather.temperature);
 
-            $('.wind').html(data.weather.wind.speed + ' m/s, ' + data.weather.wind.direction);
-            $('.pressure').html(data.weather.pressure + ' hPa');
-            $('.humidity').html(data.weather.humidity + '%');
-            $('.chance-rain').html(data.weather.clouds.percent + '%');
+            $(".wind").html(data.weather.wind.speed + " m/s, " + data.weather.wind.direction);
+            $(".pressure").html(data.weather.pressure + " hPa");
+            $(".humidity").html(data.weather.humidity + "%");
+            $(".chance-rain").html(data.weather.clouds.percent + "%");
 
             $weather.calculateCF();
 
             if (showContainer) {
-                $('.container-fluid').show();
+                $(".container-fluid").show();
             }
         }
     });
@@ -83,9 +80,9 @@ $weather.init = function () {
     $weather.chooseCity();
     $weather.changeCity();
     $weather.chooseLocation();
-    $('.deg').change(function () {
+    $(".deg").change(function () {
         $weather.calculateCF();
-    })
+    });
 }
 
 $weather.init();

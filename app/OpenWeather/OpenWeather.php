@@ -181,6 +181,25 @@ class OpenWeather
     }
 
     /**
+     * Returns current weather by latitude and longitude or by code.
+     * @param array $data
+     * @param string $units
+     * @return array|array[]
+     */
+    public function getCurrentWeatherData(array $data, string $units = 'Metric'): array
+    {
+        $weatherData = [];
+
+        if (!empty($data['code'])) {
+            $weatherData = $this->getCurrentWeatherByCityId($data['code'], $units);
+        } elseif(!empty($data['lat']) && !empty($data['long'])) {
+            $weatherData = $this->getCurrentWeatherByCoords($data['lat'], $data['long'], $units);
+        }
+
+        return $weatherData;
+    }
+
+    /**
      * @param mixed $api_key
      */
     public function setApiKey($api_key): void

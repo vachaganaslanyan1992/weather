@@ -1,5 +1,25 @@
 var $weather = {};
 $weather.temperature = 0;
+$weather.page = 1;
+
+$weather.getCities = function () {
+    $(document).find("#bs-select-1").scroll(function () {
+        if ($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+            $weather.page++;
+            $.ajax(
+                {
+                    url: "api/cities?page=" + $weather.page,
+                    type: "get",
+                    success: function (data) {
+                        $.map(data.cities, function (city) {
+                            $("#cities").append("<option value='" + city.code + "'>" + city.name + "</option>")
+                        });
+                        $("#cities").selectpicker('refresh');
+                    }
+                });
+        }
+    });
+}
 
 $weather.hideCountryList = function () {
     $(".countries-list").hide();
@@ -7,9 +27,9 @@ $weather.hideCountryList = function () {
 
 $weather.calculateCF = function () {
     if ($("input[name='deg']:checked").val() === "f") {
-        let far = ($weather.temperature * 9/5) + 32;
+        let far = ($weather.temperature * 9 / 5) + 32;
         $(".temperature").html(far.toFixed(0));
-    } else  {
+    } else {
         $(".temperature").html($weather.temperature);
     }
 }
@@ -43,6 +63,8 @@ $weather.chooseLocation = function () {
 $weather.changeCity = function () {
     $(".change-city").click(function () {
         $(".countries-list").show();
+        let cityName = $(".selected-city").text();
+        $(".filter-option-inner-inner").html(cityName);
     });
 }
 
@@ -80,6 +102,9 @@ $weather.init = function () {
     $weather.chooseCity();
     $weather.changeCity();
     $weather.chooseLocation();
+    $(".countries-list").click(function () {
+        $weather.getCities();
+    });
     $(".deg").change(function () {
         $weather.calculateCF();
     });

@@ -19,7 +19,7 @@ body {
 }
 
 .countries-list .bootstrap-select {
-    width: 579px!important;
+    width: 579px !important;
 }
 
 .countries-list button {
@@ -28,13 +28,13 @@ body {
 }
 
 .countries-list .filter-option {
-    height: 44px!important;
+    height: 44px !important;
     font-size: 30px;
-    text-align: center!important;
+    text-align: center !important;
 }
 
 .countries-list .dropdown-toggle:after {
-    display: none!important;
+    display: none !important;
 }
 
 .weather-icon {
@@ -45,10 +45,19 @@ body {
     cursor: pointer;
 }
 
+.countries-list div.inner.show {
+    max-height: 240px !important;
+}
+
+.countries-list .bs-searchbox input {
+    display: none !important;
+}
+
 /*----helpers----*/
 .dn {
     display: none;
 }
+
 .fs-18 {
     font-size: 18px;
 }

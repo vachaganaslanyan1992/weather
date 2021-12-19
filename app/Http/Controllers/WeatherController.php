@@ -16,7 +16,7 @@ class WeatherController extends Controller
      */
     public function index()
     {
-        $cites = City::select('code', 'name')->get();
+        $cites = City::select('code', 'name')->orderBy('name')->limit(15)->get();
         return view('weathers.index')->with(['cites' => $cites]);
     }
 
@@ -29,5 +29,15 @@ class WeatherController extends Controller
     {
         $weather = new OpenWeather();
         return response()->json(['weather' => $weather->getCurrentWeatherData($request->validated())]);
+    }
+
+    /**
+     * get cites
+     * @return JsonResponse
+     */
+    public function getCities(): JsonResponse
+    {
+        $cites = City::select('code', 'name')->orderBy('name')->paginate(15)->toArray();
+        return response()->json(['cities' => $cites['data']]);
     }
 }
